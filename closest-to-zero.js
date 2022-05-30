@@ -1,33 +1,60 @@
-/**
- * Auto-generated code below aims at helping you parse
- * the standard input according to the problem statement.
- **/
-const N = parseInt(readline());
-var input = readline();
+
+// for (let i = 0; i < N; i++) {
+//     const t = parseInt(inputs[i]);
+// }
+
+// // Write an answer using console.log()
+// // To debug: console.error('Debug messages...');
+
+// console.log('0');
+
+// Sort the input. Walk the sorted input
+// until either the final value, or the sign
+// changes. At this points, compare the current
+// value with previous. If absolute(previous) 
+// is less than absolute(current), return previous,
+// otherwise return current.
+
+// def go(N, input)
+// if input not supplied, return 0
+// if N === 1, return first value
+// let values be split(input)
+// let sortedValues be sort(values)
+// for each value curr in sortedValues
+//   if not final value, and sign(prev) === sign(curr)
+//     continue
+//   
+//   if absolute(prev) < absolute(curr)
+//     return prev
+//
+//  return curr
+// end for
+// end def
 
 const go = (N, input) => {
-    if(N === 0 || input === null)
-        return 0
+    if(!input) return 0
+    
+    let values = input.split(' ')
 
-    let inputs = input.split(' ')
-    inputs  = inputs.sort((a, b) => parseInt(a) - parseInt(b));
+    if(N === 1) return values[0]
 
+    let sortedValues = values.sort((a, b) => parseInt(a) - parseInt(b))
     let prev = Number.NEGATIVE_INFINITY
 
-    for (let i = 0; i < N; i++) {
-        curr = inputs[i]
-
-        if(i !== N-1 && 
-            Math.sign(prev) === Math.sign(curr)) {
+    for(let x = 0; x < N; x++) {
+        let curr = sortedValues[x]
+        if(x !== N-1 && Math.sign(curr) === Math.sign(prev)) {
             prev = curr
             continue
         }
-        
+
         if(Math.abs(prev) < Math.abs(curr))
             return prev
-
-        return curr    
+        
+        return curr
     }
 }
 
-console.log(go(N, input));
+const N = parseInt(readline());
+var input = readline()
+console.log(go(N, input))
